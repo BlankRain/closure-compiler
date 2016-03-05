@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.visallo</groupId>
+    <artifactId>visallo-closure-compiler</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Visallo: Closure Compiler</name>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.javascript</groupId>
+            <artifactId>closure-compiler</artifactId>
+            <version>v20160208</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.4.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <minimizeJar>false</minimizeJar>
+                        <artifactSet>
+                            <includes>
+                                <include>com.google.javascript:closure-compiler</include>
+                            </includes>
+                        </artifactSet>
+                        <shadedArtifactAttached>false</shadedArtifactAttached>
+                        <createDependencyReducedPom>true</createDependencyReducedPom>
+                        <keepDependenciesWithProvidedScope>false</keepDependenciesWithProvidedScope>
+                        <promoteTransitiveDependencies>false</promoteTransitiveDependencies>
+                        <relocations>
+                            <relocation>
+                                <pattern>com.google</pattern>
+                                <shadedPattern>org.visallo.web.closurecompiler.com.google</shadedPattern>
+                            </relocation>
+                            <relocation>
+                                <pattern>org.kohsuke</pattern>
+                                <shadedPattern>org.visallo.web.closurecompiler.org.kohsuke</shadedPattern>
+                            </relocation>
+                        </relocations>
+                        <filters>
+                          <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                              <exclude>META-INF/*</exclude>
+                              <exclude>META-INF/maven/**</exclude>
+                            </excludes>
+                          </filter>
+                        </filters>
+                    </configuration>
+                </execution>
+            </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
