@@ -8,6 +8,18 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>Visallo: Closure Compiler</name>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>v5analytics-snapshots</id>
+            <url>https://mvn.v5analytics.com/content/repositories/${distributionManagement.target}-snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>v5analytics</id>
+            <url>https://mvn.v5analytics.com/content/repositories/${distributionManagement.target}</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>com.google.javascript</groupId>
@@ -15,6 +27,7 @@
             <version>v20160208</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
